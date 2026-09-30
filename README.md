@@ -51,8 +51,8 @@ The platform supports:
              │                     │
              ▼                     ▼
       ┌──────────────┐      ┌───────────────┐
-      │ PostgreSQL   │      │ Semantic       │
-      │              │      │ Retrieval      │
+      │ PostgreSQL   │      │ Semantic      │
+      │              │      │ Retrieval     │
       └──────────────┘      └───────┬───────┘
                                     │
                                     ▼
