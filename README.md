@@ -1,70 +1,105 @@
 # 🤖 AI-Powered Investor Intelligence Platform
 
-An AI-powered platform for processing annual reports, extracting financial KPIs, performing semantic search, and generating investor-oriented insights using **Azure OpenAI, Azure AI Search, PostgreSQL, and RAG**.
+An end-to-end AI-powered financial document intelligence platform that transforms annual reports into searchable, structured, and conversational investor insights.
 
-The platform combines document processing, information retrieval, structured KPI extraction, and generative AI into a modular backend architecture designed for scalable deployment.
+The platform combines **document processing, semantic chunking, vector-based retrieval, financial KPI extraction, Retrieval-Augmented Generation (RAG), Azure OpenAI, Azure AI Search, PostgreSQL, and FastAPI** into a modular application architecture.
 
 ---
 
 ## 📌 Overview
 
-Financial reports contain large amounts of structured and unstructured information that can be difficult to analyze manually.
+Financial annual reports contain large amounts of structured and unstructured information, including financial statements, business performance information, management discussions, operating metrics, and company-specific financial indicators.
 
-This project provides an end-to-end workflow for transforming annual reports into an intelligent investor information system.
+Extracting useful information from these reports manually can be time-consuming.
 
-The platform supports:
+This project provides an automated workflow for processing annual reports and making their information accessible through:
 
-- 📄 Annual report ingestion
-- 🔍 Document processing and indexing
+- 📄 Document ingestion
+- 🔄 PDF-to-Markdown conversion
+- 🧩 Semantic document chunking
+- 🧠 Azure OpenAI embeddings
+- 🔎 Azure AI Search
 - 📊 Financial KPI extraction
-- 🧠 AI-powered semantic search
-- 💬 Retrieval-Augmented Generation (RAG)
-- 🗄️ PostgreSQL-based KPI storage
-- ☁️ Azure AI service integration
-- 🚀 Containerized deployment
-- ☸️ Kubernetes deployment architecture
+- 🗄️ PostgreSQL persistence
+- 💬 Retrieval-Augmented Generation
+- 🤖 Azure OpenAI-powered responses
+- 📊 Investor dashboard
+- 🚀 Docker-based deployment
+- ☸️ Kubernetes deployment configuration
 
-### High-Level Workflow
+---
+
+# 🎯 Problem Statement
+
+Financial reports are often large documents containing hundreds of pages of information.
+
+Traditional approaches require users to:
+
+1. Open the annual report.
+2. Search manually for relevant information.
+3. Read multiple sections.
+4. Extract financial metrics.
+5. Compare information manually.
+6. Interpret the retrieved information.
+
+This project automates a significant part of that workflow.
+
+The system converts annual reports into machine-processable content, indexes the information for semantic retrieval, extracts structured financial KPIs, and provides a conversational interface for querying the processed information.
+
+---
+
+# 💡 Solution
+
+The platform follows an end-to-end document intelligence pipeline:
 
 ```text
-                 Annual Reports
-                       │
-                       ▼
-              ┌─────────────────┐
-              │ Document        │
-              │ Ingestion       │
-              └────────┬────────┘
-                       │
-                       ▼
-              ┌─────────────────┐
-              │ Document        │
-              │ Processing      │
-              └────────┬────────┘
-                       │
-             ┌─────────┴─────────┐
-             │                   │
-             ▼                   ▼
-      ┌──────────────┐    ┌────────────────┐
-      │ KPI          │    │ Azure AI       │
-      │ Extraction   │    │ Search         │
-      └──────┬───────┘    └───────┬────────┘
-             │                     │
-             ▼                     ▼
-      ┌──────────────┐      ┌───────────────┐
-      │ PostgreSQL   │      │ Semantic      │
-      │              │      │ Retrieval     │
-      └──────────────┘      └───────┬───────┘
-                                    │
-                                    ▼
-                             ┌───────────────┐
-                             │ RAG Pipeline  │
-                             └───────┬───────┘
-                                     │
-                                     ▼
-                              ┌─────────────┐
-                              │ Azure       │
-                              │ OpenAI      │
-                              └──────┬──────┘
-                                     │
-                                     ▼
-                              Investor Insights
+                  Annual Report PDF
+                         │
+                         ▼
+               ┌──────────────────┐
+               │ PDF Processing    │
+               └────────┬─────────┘
+                        │
+                        ▼
+               ┌──────────────────┐
+               │ PDF → Markdown   │
+               │   PyMuPDF4LLM    │
+               └────────┬─────────┘
+                        │
+                        ▼
+               ┌──────────────────┐
+               │ Semantic Chunking│
+               │  LangChain       │
+               └────────┬─────────┘
+                        │
+                        ▼
+               ┌──────────────────┐
+               │ Azure OpenAI     │
+               │ Embeddings       │
+               └────────┬─────────┘
+                        │
+                        ▼
+               ┌──────────────────┐
+               │ Azure AI Search  │
+               │ Vector Index     │
+               └────────┬─────────┘
+                        │
+              ┌─────────┴─────────┐
+              │                   │
+              ▼                   ▼
+      Financial KPI           User Query
+       Extraction                 │
+              │                   ▼
+              ▼             Semantic Retrieval
+        PostgreSQL                │
+                                  ▼
+                           Retrieved Context
+                                  │
+                                  ▼
+                            RAG Pipeline
+                                  │
+                                  ▼
+                           Azure OpenAI
+                                  │
+                                  ▼
+                       Investor Intelligence
